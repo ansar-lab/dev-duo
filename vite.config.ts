@@ -2,26 +2,21 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    host: "::",
-    port: 8080,
-  },
   plugins: [
     react(),
+    // Removed htmlPrerender to avoid Puppeteer issues and build hangs
   ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Handle SPA routing for client-side routes
+  server: {
+    host: "::",
+    port: 8080,
+  },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
+    outDir: "dist",
   },
 });
