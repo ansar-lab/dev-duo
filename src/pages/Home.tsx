@@ -1,11 +1,35 @@
 import { FounderCard } from '@/components/FounderCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Smartphone, Megaphone, Palette, Cpu, Video } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Background3D from '@/components/Background3D';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
+  const location = useLocation();
+  const [highlightedService, setHighlightedService] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Check for service hash in URL
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      setHighlightedService(hash);
+      
+      // Scroll to services section
+      const servicesSection = document.getElementById('services-section');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      // Reset highlight after 2 seconds
+      const timer = setTimeout(() => {
+        setHighlightedService(null);
+      }, 2000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
   const services = [
     {
       icon: Code,
@@ -55,7 +79,7 @@ const Home = () => {
     },
     {
       name: 'MD Ansar Vali',
-      image: '/images/0250e237-9743-4be2-b11b-1f501eea372d.png',
+      image: '/images/ansarvali.jpg',
       linkedin: 'https://www.linkedin.com/in/mohammad-ansar-vali-80b099317',
       instagram: 'https://www.instagram.com/_kakashi_3_',
       email: 'mailto:devduocompany@gmail.com'
@@ -117,7 +141,7 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 px-4 relative">
+      <section id="services-section" className="py-32 px-4 relative">
         <div className="container mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-cyber">
@@ -130,23 +154,39 @@ const Home = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-1000">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="glass-card p-8 text-center transform-3d hover:scale-105 animate-fade-in-cyber group"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-card/50 border border-primary/30 flex items-center justify-center mx-auto">
-                    <service.icon className="w-10 h-10 text-primary-glow group-hover:scale-110 transition-transform duration-300" />
+            {services.map((service, index) => {
+              // Map service titles to IDs for highlighting
+              const serviceId = service.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+              const isHighlighted = highlightedService === serviceId;
+              
+              return (
+                <div
+                  key={index}
+                  id={serviceId}
+                  className={`glass-card p-8 text-center transform-3d hover:scale-105 animate-fade-in-cyber group ${
+                    isHighlighted ? 'ring-2 ring-primary-glow shadow-glow scale-105' : ''
+                  }`}
+                  style={{ 
+                    animationDelay: `${index * 200}ms`,
+                    transition: 'all 0.3s ease-in-out'
+                  }}
+                >
+                  <div className="relative mb-6">
+                    <div className={`w-20 h-20 rounded-full bg-card/50 border ${
+                      isHighlighted ? 'border-primary-glow' : 'border-primary/30'
+                    } flex items-center justify-center mx-auto`}>
+                      <service.icon className={`w-10 h-10 ${
+                        isHighlighted ? 'text-primary-glow scale-110' : 'text-primary-glow'
+                      } group-hover:scale-110 transition-transform duration-300`} />
+                    </div>
                   </div>
+                  
+                  <h3 className="text-xl font-bold mb-4 cyber-text">{service.title}</h3>
+                  <p className="text-foreground/80 font-mono text-sm leading-relaxed">{service.description}</p>
+                  
                 </div>
-                
-                <h3 className="text-xl font-bold mb-4 cyber-text">{service.title}</h3>
-                <p className="text-foreground/80 font-mono text-sm leading-relaxed">{service.description}</p>
-                
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

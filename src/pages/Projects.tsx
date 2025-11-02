@@ -3,7 +3,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { ProjectCard } from '@/components/ProjectCard';
 import { Loader2, AlertCircle } from 'lucide-react';
 import Background3D from '@/components/Background3D';
-import { Helmet } from 'react-helmet-async';
 
 interface Project {
   id: string;
@@ -89,13 +88,6 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen pt-24 relative">
-      <Helmet>
-      <title>Our Work | DevDuo Projects</title>
-      <meta
-      name="description"
-      content="Explore the products and digital experiences we've crafted for our global clients."
-      />
-      </Helmet>
       <Background3D intensity="low" />
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -139,7 +131,7 @@ const Projects = () => {
               {filteredProjects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="animate-fade-in-up"
+                  className="animate-fade-in-up h-full flex"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <ProjectCard {...project} />
