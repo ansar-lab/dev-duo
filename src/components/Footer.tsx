@@ -13,12 +13,10 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
     ],
     services: [
-      { name: 'Website Creation', href: '/#website-creation' },
-      { name: 'App Development', href: '/#mobile-app-development' },
-      { name: 'AI-Powered Ads', href: '/#ai-powered-marketing' },
-      { name: 'Graphic Design', href: '/#ui-ux-design' },
-      { name: 'PCB Designing', href: '/#pcb-designing' },
-      { name: 'Video Editing', href: '/#video-editing' },
+      { name: 'Website Creation', href: '/services#web' },
+      { name: 'App Development', href: '/services#app' },
+      { name: 'AI-Powered Ads', href: '/services#ai' },
+      { name: 'Graphic Design', href: '/services#design' },
     ],
   };
 

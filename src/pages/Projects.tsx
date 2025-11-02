@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { ProjectCard } from '@/components/ProjectCard';
 import { Loader2, AlertCircle } from 'lucide-react';
 import Background3D from '@/components/Background3D';
+import { Helmet } from 'react-helmet-async';
 
 interface Project {
   id: string;
@@ -105,16 +106,18 @@ const Projects = () => {
       {/* Filter Section */}
       <section className="pb-12 px-4">
         <div className="container mx-auto">
+          <h2 className="text-xl font-medium text-center mb-6">Filter by project type</h2>
           <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all ${
+                className={`px-6 py-2 rounded-full transition-all shadow-sm hover:shadow-md ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card text-foreground hover:bg-accent'
+                    ? 'bg-primary text-primary-foreground font-medium scale-105'
+                    : 'bg-card text-foreground hover:bg-accent hover:scale-105'
                 }`}
+                aria-label={`Filter by ${category} projects`}
               >
                 {category}
               </button>
