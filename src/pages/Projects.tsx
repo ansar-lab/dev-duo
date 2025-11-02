@@ -112,12 +112,13 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all shadow-sm hover:shadow-md ${
+                className={`px-6 py-2 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer z-10 relative ${
                   selectedCategory === category
                     ? 'bg-primary text-primary-foreground font-medium scale-105'
                     : 'bg-card text-foreground hover:bg-accent hover:scale-105'
                 }`}
                 aria-label={`Filter by ${category} projects`}
+                type="button"
               >
                 {category}
               </button>
