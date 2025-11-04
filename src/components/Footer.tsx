@@ -17,6 +17,8 @@ const Footer = () => {
       { name: 'App Development', href: '/#services-section' },
       { name: 'AI-Powered Ads', href: '/#services-section' },
       { name: 'Graphic Design', href: '/#services-section' },
+      { name: 'PCB Designing', href: '/#services-section' },
+      { name: 'Video Editing', href: '/#services-section' },
     ],
   };
 
