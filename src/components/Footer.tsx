@@ -13,10 +13,10 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
     ],
     services: [
-      { name: 'Website Creation', href: '/services#web' },
-      { name: 'App Development', href: '/services#app' },
-      { name: 'AI-Powered Ads', href: '/services#ai' },
-      { name: 'Graphic Design', href: '/services#design' },
+      { name: 'Website Creation', href: '/#services-section' },
+      { name: 'App Development', href: '/#services-section' },
+      { name: 'AI-Powered Ads', href: '/#services-section' },
+      { name: 'Graphic Design', href: '/#services-section' },
     ],
   };
 
@@ -90,7 +90,19 @@ const Footer = () => {
                   <Link
                     to={link.href}
                     className="text-[hsl(290,10%,70%)] hover:text-[hsl(285,100%,75%)] transition-colors duration-300 flex items-center group"
-                    onClick={() => window.scrollTo(0, 0)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (window.location.pathname === '/') {
+                        // If already on homepage, scroll to services section
+                        const servicesSection = document.getElementById('services-section');
+                        if (servicesSection) {
+                          servicesSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      } else {
+                        // If on another page, navigate to homepage and then scroll
+                        window.location.href = '/#services-section';
+                      }
+                    }}
                   >
                     <span className="w-2 h-2 rounded-full bg-[hsl(285,100%,55%,0)] group-hover:bg-[hsl(285,100%,55%,0.5)] mr-3 transition-all duration-300" />
                     {link.name}
