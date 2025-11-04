@@ -14,18 +14,30 @@ const Home = () => {
     // Check for service hash in URL
     const hash = location.hash.replace('#', '');
     if (hash) {
-      setHighlightedService(hash);
+      // Convert the hash to match the service ID format (lowercase, spaces to hyphens, remove special char)
+      const formattedHash = hash.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      setHighlightedService(formattedHash);
       
-      // Scroll to services section
+      // Scroll to services section with proper offset
       const servicesSection = document.getElementById('services-section');
       if (servicesSection) {
-        servicesSection.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // After scrolling, scroll to the specific service
+          setTimeout(() => {
+            const serviceElement = document.getElementById(formattedHash);
+            if (serviceElement) {
+              serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 500);
+        }, 100);
       }
       
-      // Reset highlight after 2 seconds
+      // Reset highlight after 3 seconds (longer duration for better visibility)
       const timer = setTimeout(() => {
         setHighlightedService(null);
-      }, 2000);
+      }, 3000);
       
       return () => clearTimeout(timer);
     }
@@ -75,14 +87,16 @@ const Home = () => {
       image: '/images/10c986ba-e64c-4f36-b0f7-3c31e81c6649.png',
       linkedin: 'https://www.linkedin.com/in/sathwik-sai-t-v-ba202830a',
       instagram: 'https://www.instagram.com/sathwik__s_a_i__',
-      email: 'mailto:devduocompany@gmail.com'
+      email: 'mailto:devduocompany@gmail.com',
+      role: 'Founder'
     },
     {
       name: 'MD Ansar Vali',
       image: '/images/ansarvali.jpg',
       linkedin: 'https://www.linkedin.com/in/mohammad-ansar-vali-80b099317',
       instagram: 'https://www.instagram.com/_kakashi_3_',
-      email: 'mailto:devduocompany@gmail.com'
+      email: 'mailto:devduocompany@gmail.com',
+      role: 'Co-Founder'
     }
   ];
 
@@ -164,19 +178,23 @@ const Home = () => {
                   key={index}
                   id={serviceId}
                   className={`glass-card p-8 text-center transform-3d hover:scale-105 animate-fade-in-cyber group ${
-                    isHighlighted ? 'ring-2 ring-primary-glow shadow-glow scale-105' : ''
+                    isHighlighted ? 'shadow-cyber-lg ring-2 ring-[hsl(285_100%_55%_/_0.6)]' : ''
                   }`}
                   style={{ 
                     animationDelay: `${index * 200}ms`,
-                    transition: 'all 0.3s ease-in-out'
+                    transition: 'all 0.3s ease-in-out',
+                    borderColor: isHighlighted ? 'hsl(285 100% 55% / 0.8)' : undefined,
+                    transform: isHighlighted ? 'translateY(-8px) scale(1.02)' : undefined,
+                    animation: isHighlighted ? 'cyber-pulse 0.6s ease-in-out' : undefined,
+                    boxShadow: isHighlighted ? '0 0 30px hsl(285 100% 55% / 0.4), 0 0 60px hsl(285 100% 55% / 0.2)' : undefined
                   }}
                 >
                   <div className="relative mb-6">
                     <div className={`w-20 h-20 rounded-full bg-card/50 border ${
-                      isHighlighted ? 'border-primary-glow' : 'border-primary/30'
+                      isHighlighted ? 'border-[hsl(285_100%_55%_/_0.4)]' : 'border-primary/30'
                     } flex items-center justify-center mx-auto`}>
                       <service.icon className={`w-10 h-10 ${
-                        isHighlighted ? 'text-primary-glow scale-110' : 'text-primary-glow'
+                        isHighlighted ? 'text-[hsl(285_100%_75%)] scale-110' : 'text-primary-glow'
                       } group-hover:scale-110 transition-transform duration-300`} />
                     </div>
                   </div>

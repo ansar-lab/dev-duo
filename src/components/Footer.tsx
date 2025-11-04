@@ -13,12 +13,12 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
     ],
     services: [
-      { name: 'Website Creation', href: '/#services-section' },
-      { name: 'App Development', href: '/#services-section' },
-      { name: 'AI-Powered Ads', href: '/#services-section' },
-      { name: 'Graphic Design', href: '/#services-section' },
-      { name: 'PCB Designing', href: '/#services-section' },
-      { name: 'Video Editing', href: '/#services-section' },
+      { name: 'Website Creation', href: '/#website-creation' },
+      { name: 'App Development', href: '/#app-development' },
+      { name: 'AI-Powered Ads', href: '/#ai-powered-ads' },
+      { name: 'Graphic Design', href: '/#graphic-design' },
+      { name: 'PCB Designing', href: '/#pcb-designing' },
+      { name: 'Video Editing', href: '/#video-editing' },
     ],
   };
 
@@ -94,15 +94,24 @@ const Footer = () => {
                     className="text-[hsl(290,10%,70%)] hover:text-[hsl(285,100%,75%)] transition-colors duration-300 flex items-center group"
                     onClick={(e) => {
                       e.preventDefault();
+                      const serviceName = link.name;
+                      // Convert service name to match the ID format used in Home.tsx
+                      const serviceId = serviceName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                      
                       if (window.location.pathname === '/') {
-                        // If already on homepage, scroll to services section
+                        // First scroll to the services section
                         const servicesSection = document.getElementById('services-section');
                         if (servicesSection) {
-                          servicesSection.scrollIntoView({ behavior: 'smooth' });
+                          servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          
+                          // Add a small delay to ensure the section is in view, then update the hash
+                          setTimeout(() => {
+                            window.location.hash = serviceId;
+                          }, 300);
                         }
                       } else {
-                        // If on another page, navigate to homepage and then scroll
-                        window.location.href = '/#services-section';
+                        // Navigate to home with the service hash
+                        window.location.href = `/#${serviceId}`;
                       }
                     }}
                   >
@@ -157,21 +166,16 @@ const Footer = () => {
         <div className="mt-16 pt-12 border-t border-[hsl(258,40%,20%)]">
           <div className="max-w-2xl mx-auto text-center">
             <h4 className="text-xl font-semibold text-[hsl(300,20%,95%)] mb-4">
-              Stay Updated with Our Latest Innovations
+              Connect With Us
             </h4>
             <p className="text-[hsl(290,10%,70%)] mb-6">
-              Get notified about new projects, AI breakthroughs, and exclusive insights
+              Have a project in mind? We'd love to hear from you.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-[hsl(258,60%,10%)] border border-[hsl(258,40%,20%)] rounded-lg text-[hsl(300,20%,95%)] placeholder-[hsl(290,10%,70%)] focus:border-[hsl(285,100%,55%)] focus:outline-none transition-colors"
-              />
+            <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
               <Button className="bg-gradient-to-r from-[hsl(280,70%,45%)] to-[hsl(285,75%,55%)] text-white hover:from-[hsl(280,70%,50%)] hover:to-[hsl(285,75%,60%)] transition-all duration-300">
-                Subscribe
+                Get in Touch
               </Button>
-            </div>
+            </Link>
           </div>
         </div>
 

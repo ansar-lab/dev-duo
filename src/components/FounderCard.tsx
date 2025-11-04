@@ -6,9 +6,10 @@ interface FounderCardProps {
   linkedin: string;
   instagram: string;
   email: string;
+  role: string;
 }
 
-export const FounderCard = ({ name, image, linkedin, instagram, email }: FounderCardProps) => {
+export const FounderCard = ({ name, image, linkedin, instagram, email, role }: FounderCardProps) => {
   return (
     <div className="founder-card p-8 max-w-sm mx-auto animate-fade-in-cyber perspective-1000">
       <div className="relative transform-3d">
@@ -55,7 +56,7 @@ export const FounderCard = ({ name, image, linkedin, instagram, email }: Founder
       
       <div className="text-center mt-6 space-y-2">
         <h3 className="text-2xl font-bold cyber-text">{name}</h3>
-        <p className="text-primary-glow font-mono text-lg">Co-Founder</p>
+        <p className="text-primary-glow font-mono text-lg">{role}</p>
         <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-4" />
       </div>
     </div>

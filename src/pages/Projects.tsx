@@ -106,19 +106,16 @@ const Projects = () => {
       {/* Filter Section */}
       <section className="pb-12 px-4">
         <div className="container mx-auto">
-          <h2 className="text-xl font-medium text-center mb-6">Filter by project type</h2>
           <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all shadow-sm hover:shadow-md cursor-pointer z-10 relative ${
+                className={`px-6 py-2 rounded-full transition-all ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground font-medium scale-105'
-                    : 'bg-card text-foreground hover:bg-accent hover:scale-105'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-card text-foreground hover:bg-accent'
                 }`}
-                aria-label={`Filter by ${category} projects`}
-                type="button"
               >
                 {category}
               </button>
