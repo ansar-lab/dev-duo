@@ -21,6 +21,7 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [isFiltering, setIsFiltering] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -54,19 +55,37 @@ const Projects = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setProjects(data || []);
+      
+      console.log('Raw project data:', data);
+      
+      // Ensure all projects have a valid category
+      const validProjects = (data || []).map(project => ({
+        ...project,
+        category: project.category || 'other'
+      }));
+      
+      setProjects(validProjects);
     } catch (err) {
+      console.error('Error fetching projects:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
   };
 
-  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
+  const categories = projects.length > 0 
+    ? ['All', ...Array.from(new Set(projects.map(p => p.category)))]
+    : ['All', 'Web Development', 'Mobile App', 'Desktop Application', 'AI/ML', 'Blockchain', 'Other'];
   
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
     : projects.filter(p => p.category === selectedCategory);
+
+  // Debug logging (removed for production)
+  // console.log('Projects loaded:', projects.length);
+  // console.log('Categories found:', categories);
+  // console.log('Selected category:', selectedCategory);
+  // console.log('Filtered projects:', filteredProjects.length);
 
   if (loading) {
     return (
@@ -110,14 +129,26 @@ const Projects = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all ${
+                onClick={() => {
+                  setIsFiltering(true);
+                  setSelectedCategory(category);
+                  // Small delay to show filtering animation
+                  setTimeout(() => setIsFiltering(false), 200);
+                }}
+                disabled={isFiltering}
+                className={`px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-card text-foreground hover:bg-accent'
+                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                    : 'bg-card text-foreground hover:bg-accent hover:shadow-md border border-border/50'
                 }`}
               >
-                {category}
+                <span className="relative z-10">{category}</span>
+                {isFiltering && selectedCategory === category && (
+                  <span className="ml-2 inline-block w-2 h-2 bg-current rounded-full animate-pulse relative z-10"></span>
+                )}
+                {selectedCategory === category && (
+                  <span className="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-75"></span>
+                )}
               </button>
             ))}
           </div>
@@ -128,7 +159,7 @@ const Projects = () => {
       <section className="pb-20 px-4">
         <div className="container mx-auto">
           {filteredProjects.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-300 ${isFiltering ? 'opacity-50' : 'opacity-100'}`}>
               {filteredProjects.map((project, index) => (
                 <div
                   key={project.id}
