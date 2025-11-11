@@ -38,32 +38,32 @@ export const FeedbackCard = ({
   };
 
   return (
-    <div className="project-card bg-card p-6">
+    <div className="project-card bg-card p-6 group transform-3d hover:ring-2 ring-[hsl(285_100%_55%_/_0.35)] transition-all">
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-          <span className="text-primary font-semibold text-lg">
+        <div className="w-12 h-12 rounded-full bg-primary/20 group-hover:bg-primary/30 transition-colors flex items-center justify-center">
+          <span className="text-primary font-semibold text-lg group-hover:text-primary-glow transition-colors">
             {client_name_sanitized.charAt(0).toUpperCase()}
           </span>
         </div>
         
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="font-semibold">{client_name_sanitized}</h4>
+            <h4 className="font-semibold group-hover:text-primary-glow transition-colors">{client_name_sanitized}</h4>
             <span className="text-xs text-muted-foreground">
               {formatDate(created_at)}
             </span>
           </div>
           
           <div className="flex items-center gap-2 mb-2">
-            <div className="flex">{renderStars(rating)}</div>
+            <div className="flex group-hover:scale-105 transition-transform">{renderStars(rating)}</div>
             <span className="text-sm text-muted-foreground">({rating}/5)</span>
           </div>
           
           {project_title && (
-            <p className="text-sm text-accent mb-2">Project: {project_title}</p>
+            <p className="text-sm text-accent mb-2 group-hover:text-primary-glow transition-colors">Project: {project_title}</p>
           )}
           
-          <p className="text-muted-foreground">{feedback}</p>
+          <p className="text-muted-foreground group-hover:text-foreground transition-colors">{feedback}</p>
         </div>
       </div>
     </div>

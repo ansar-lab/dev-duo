@@ -106,6 +106,37 @@ const About = () => {
         </div>
       </section>
 
+      {/* Why DevDuo Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-8 animate-fade-in-up">
+            Why <span className="text-primary">DevDuo</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-center mb-12 animate-fade-in-up animation-delay-200">
+            Partner with a team that ships polished products and measures success by outcomes.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              { title: 'Results-Driven Delivery', description: 'We focus on KPIs—speed, conversion, reliability—not just code output.' },
+              { title: 'Senior Craftsmanship', description: 'Clean architecture, scalable patterns, and maintainable code from day one.' },
+              { title: 'Transparent Collaboration', description: 'Clear roadmaps, frequent demos, and proactive communication throughout.' },
+              { title: 'Agile & Fast', description: 'Short iterations, quick feedback loops, and continuous improvements.' },
+              { title: 'Full-Stack Expertise', description: 'Product, design, frontend, backend, and cloud—covered end‑to‑end.' },
+              { title: 'Post‑Launch Support', description: 'Monitoring, performance tuning, and feature expansions as you grow.' },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="project-card bg-card p-6 animate-fade-in-up"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
@@ -116,7 +147,7 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="project-card bg-card p-8 animate-fade-in-up">
               <h3 className="text-2xl font-bold mb-4 text-primary">TV Sathwik Sai</h3>
-              <p className="text-lg font-semibold mb-4">Co-Founder & Full-Stack Developer</p>
+              <p className="text-lg font-semibold mb-4">Founder & CEO</p>
               <p className="text-muted-foreground mb-4">
                 Sathwik brings a wealth of experience in modern web technologies and has a passion 
                 for creating scalable, user-friendly applications. His expertise spans from frontend 
@@ -130,7 +161,7 @@ const About = () => {
             
             <div className="project-card bg-card p-8 animate-fade-in-up animation-delay-200">
               <h3 className="text-2xl font-bold mb-4 text-primary">MD Ansar Vali</h3>
-              <p className="text-lg font-semibold mb-4">Co-Founder & Creative Developer</p>
+              <p className="text-lg font-semibold mb-4">Co-Founder & CTO</p>
               <p className="text-muted-foreground mb-4">
                 Ansar combines technical skills with creative vision, specializing in UI/UX design 
                 and frontend development. His eye for detail and user-centric approach ensures that 
