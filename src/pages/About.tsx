@@ -117,12 +117,12 @@ const About = () => {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
-              { title: 'Results-Driven Delivery', description: 'We focus on KPIs—speed, conversion, reliability—not just code output.' },
-              { title: 'Senior Craftsmanship', description: 'Clean architecture, scalable patterns, and maintainable code from day one.' },
-              { title: 'Transparent Collaboration', description: 'Clear roadmaps, frequent demos, and proactive communication throughout.' },
-              { title: 'Agile & Fast', description: 'Short iterations, quick feedback loops, and continuous improvements.' },
-              { title: 'Full-Stack Expertise', description: 'Product, design, frontend, backend, and cloud—covered end‑to‑end.' },
-              { title: 'Post‑Launch Support', description: 'Monitoring, performance tuning, and feature expansions as you grow.' },
+              { title: 'Transparent Deliveries', description: 'Clear documentation and invoicing on every deal—no surprises.' },
+              { title: 'Budget-Friendly Deals', description: 'Solutions tailored to your budget without compromising quality.' },
+              { title: 'On-Time Delivery', description: 'Disciplined execution and reliable timelines for every project.' },
+              { title: 'Client-Centric Reviews', description: 'We value client feedback and approach, iterating with your input.' },
+              { title: 'Personal Engagement', description: 'In-person or personalized communication for better clarity and deliverables.' },
+              { title: 'Technical Expertise', description: 'A team of Maven developers with deep modern stack experience.' },
             ].map((item, index) => (
               <div
                 key={index}
