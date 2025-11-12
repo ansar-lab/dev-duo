@@ -142,11 +142,11 @@ const ClientFeedback = () => {
       <section className="pb-20 px-4">
         <div className="container mx-auto">
           {feedbacks.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
               {feedbacks.map((feedback, index) => (
                 <div
                   key={feedback.id}
-                  className="animate-fade-in-up"
+                  className="animate-fade-in-up h-full"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <FeedbackCard {...feedback} />
