@@ -1,6 +1,6 @@
 import { FounderCard } from '@/components/FounderCard';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Code, Smartphone, Megaphone, Palette, Cpu, Video } from 'lucide-react';
+import { ArrowRight, Code, Smartphone, Megaphone, Palette, Cpu, Video, Search, PenTool } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Background3D from '@/components/Background3D';
 import { useEffect, useState } from 'react';
@@ -78,6 +78,18 @@ const Home = () => {
       title: 'Video Editing',
       description: 'Professional video production and post-processing',
       color: 'from-accent to-secondary'
+    },
+    {
+      icon: Search,
+      title: 'SEO Optimization',
+      description: 'Search engine optimization for better visibility and growth',
+      color: 'from-secondary to-accent'
+    },
+    {
+      icon: PenTool,
+      title: 'CAD Designing',
+      description: 'Precision 2D/3D CAD models and design drafting',
+      color: 'from-primary-glow to-secondary'
     }
   ];
 

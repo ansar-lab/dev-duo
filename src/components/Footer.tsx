@@ -19,6 +19,8 @@ const Footer = () => {
       { name: 'Graphic Design', href: '/#graphic-design' },
       { name: 'PCB Designing', href: '/#pcb-designing' },
       { name: 'Video Editing', href: '/#video-editing' },
+      { name: 'SEO Optimization', href: '/#seo-optimization' },
+      { name: 'CAD Designing', href: '/#cad-designing' },
     ],
   };
 
