@@ -9,7 +9,11 @@ export const useAuth = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   // List of authorized admin emails
-  const authorizedAdminEmails = ['ansavali3231@gmail.com', 'tvsathwiksaii@gmail.com'];
+  const authorizedAdminEmails = [
+    'ansavali3231@gmail.com',
+    'devduocompany@gmail.com',
+    'tvsathwiksai@gmail.com'
+  ];
 
   // Function to check if a user is an authorized admin
   const isAuthorizedAdmin = (email: string | undefined): boolean => {
